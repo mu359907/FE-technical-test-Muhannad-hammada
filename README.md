@@ -23,7 +23,7 @@ Ready to dive into this codebase like a dentist tackling a tricky molar? Here’
    Watch the app spring to life (or limp along, given its current state) in your browser, ready for your expert touch.
 
 ## How to Submit
-You’ll find the codebase in all its chaotic glory at [URL here]. Fork that repo, work your magic, and submit a pull request to our test repo. Before you dive in, take a moment to play around with the form—get a feel for its quirks and conditions, like poking around a patient’s mouth before a procedure.
+You’ll find the codebase in all its chaotic glory at [this repo](https://github.com/hghazi-prepx/FE-technical-test). Fork that repo, work your magic, and submit a pull request to our test repo. Before you dive in, take a moment to play around with the form—get a feel for its quirks and conditions, like poking around a patient’s mouth before a procedure.
 
 ## Bonus Points
 Want to make our jaws drop? Sprinkle in some **best practices**, refactor that monolith into sleek, reusable components, and sweep away those unused imports and commented code like plaque on a tooth. Show us you can make this codebase sparkle brighter than a freshly polished smile!
