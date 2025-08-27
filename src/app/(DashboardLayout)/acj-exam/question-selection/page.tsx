@@ -574,9 +574,6 @@ export default function StationManagement() {
     getAllSelectedQuestion();
   }, [page, rowsPerPage, orderBy]);
 
-  if (isLoading) {
-    return <Loading />;
-  }
   return (
     <PageContainer title="Question Selection" description="Question Selection">
       <ExamWizardSteps step={1} examid={examId} />

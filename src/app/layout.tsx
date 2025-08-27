@@ -1,5 +1,4 @@
 import React from "react";
-import "@/app/api/index";
 import "react-quill/dist/quill.snow.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";

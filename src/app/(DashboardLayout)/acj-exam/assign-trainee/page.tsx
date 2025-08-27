@@ -48,23 +48,15 @@ import {
   stickyTableHeaderContainerStyle,
 } from "@/utils/commonstyles";
 import { IconX, IconDots } from "@tabler/icons-react";
-import {
-  getOneTrainee,
-  getTraineeimportInLms,
-} from "@/services/trainee/traineeAPI";
 import Image from "next/image";
 import moment from "moment";
 import ExamWizardSteps from "@/components/ExamWizardSteps";
 import DeleteModalComponent from "@/components/DeleleModalComponent";
 import {
-  assignMassStudentData,
   assignTraineeForNewExam,
   deleteStudentForNewExam,
   getAssignTraineeListForNewExam,
   getAvailableTraineeForNewExam,
-  getLocationListForNewExam,
-  getOneExamForNewExam,
-  updateTraineeLocationForNewExam,
 } from "@/services/newExamFlow/newExamFlowAPI";
 import CustomTablePagination from "@/components/CustomPagination";
 import usePagination2 from "@/hooks/usePagination2";
@@ -255,27 +247,6 @@ export default function AssignTrainee() {
       const formData = new FormData();
       formData.append("file", file);
       formData.append("ExamID", examId);
-      await assignMassStudentData(formData)
-        .then((result) => {
-          if (result?.success) {
-            toast({
-              type: "success",
-              message: "Assigned trainees successfully.",
-            });
-            // getAvailableStudentList();
-            setNotFoundStudent(result?.data?.notFoundStudents);
-            getAllSelectedStudent();
-            setStudentSelectedId([]);
-            setStudentSelectedId("");
-          }
-          // setLoading(false);
-          setIsLoading(false);
-        })
-        .catch((error) => {
-          console.log("error: ", error);
-          // setLoading(false);
-          setIsLoading(false);
-        });
     }
   };
 
@@ -453,27 +424,13 @@ export default function AssignTrainee() {
    * @ Function Purpose   : Calling to get all location list
    */
   const getAllLocation = async () => {
-    setIsLoading(true);
-    setAllChecked(false);
-    setCheckedItems({});
+    // setIsLoading(true);
+    // setAllChecked(false);
+    // setCheckedItems({});
     // const bodyData = {
     //   limit: 5,
     //   page: 0,
     // };
-    await getLocationListForNewExam(examId)
-      .then((result) => {
-        if (result?.success) {
-          // handleModalClose();
-          setLocationList(result?.data);
-        }
-        handleModalClose();
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.log("error: ", error);
-        handleModalClose();
-        setIsLoading(false);
-      });
   };
 
   const getExamData = async () => {
@@ -498,52 +455,6 @@ export default function AssignTrainee() {
     setIsLoading(false);
   };
 
-  const handleUpdateSelectedTrainee = async () => {
-    // setAnchorEl(null);
-    // // const defaultValue = "";
-    setIsLoading(true);
-    const body = {
-      CampusID: location,
-    };
-    await updateTraineeLocationForNewExam(selectedAssignStudentId, body)
-      .then((result) => {
-        setIsLoading(false);
-        if (result?.success) {
-          getAllSelectedStudent();
-          setSelectedAssignStudentId("");
-          handleLocationModelClose();
-        }
-      })
-      .catch((error) => {
-        console.log("error: ", error);
-        setIsLoading(false);
-      });
-  };
-
-  /**
-   * @ Function Name      : getLocation
-   * @ Function Purpose   : Getting location details
-   */
-  const getTrainee = async (traineeId: any) => {
-    setIsLoading(true);
-    await getOneTrainee(traineeId)
-      .then((result) => {
-        if (result?.success) {
-          setTraineeData(result?.data);
-          // setOpenAutocomplete(false);
-          setmodalPreviewOpen(true);
-          setAnchorEl(null);
-          // setSelectedStudents([]);
-        }
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        setAnchorEl(null);
-        toast({ type: "error", message: "Trainee not found." });
-        console.log("error: ", error);
-        setIsLoading(false);
-      });
-  };
 
   const getIMockExam = async () => {
     try {
@@ -565,33 +476,6 @@ export default function AssignTrainee() {
     setmodalPreviewOpen(false);
   };
 
-  // LMS Import AssignStudent
-
-  const handleLMSImportAssignStudent = async () => {
-    setIsLoading(true);
-    const bodyData = {
-      CourseId: examData?.PrepXExamAFKACJOSCECourseIdentifier[0],
-      ExamID: examId,
-      csStudent: false
-    };
-    await getTraineeimportInLms(bodyData)
-      .then((result) => {
-        if (result?.success) {
-          toast({ type: "success", message: "Assigned Trainee successfully" });
-
-          getAllSelectedStudent();
-          setStudentSelectedId([]);
-          setStudentSelectedId("");
-          setIsLoading(false);
-        }
-      })
-      .catch((error) => {
-        setAnchorEl(null);
-        toast({ type: "error", message: "Student not found" });
-        console.log("error: ", error);
-        setIsLoading(false);
-      });
-  };
 
   // const filterOptions: any = createFilterOptions({
   //   matchFrom: "any",
@@ -767,7 +651,6 @@ export default function AssignTrainee() {
                           onClick={(event) => {
                             event.stopPropagation();
                             setOpenAutocomplete(false);
-                            getTrainee(option?.UserID);
                           }}
                         >
                           Preview
@@ -1518,14 +1401,6 @@ export default function AssignTrainee() {
                               vertical: "bottom",
                             }}
                           >
-                            {/* <MenuItem onClick={() => setOpenModal(true)}>
-                                Edit
-                              </MenuItem> */}
-                            <MenuItem
-                              onClick={() => getTrainee(previewStudentId)}
-                            >
-                              View
-                            </MenuItem>
                             <MenuItem
                               onClick={() =>
                                 handleDeleteSelectedStudent(
@@ -1534,23 +1409,6 @@ export default function AssignTrainee() {
                               }
                             >
                               Remove
-                            </MenuItem>
-                            {/* <MenuItem
-                              onClick={() => router.push("/audit-trail")}
-                            >
-                              View Log
-                            </MenuItem>
-                            <MenuItem onClick={handleClose}>Report</MenuItem> */}
-
-
-                            <MenuItem
-                              onClick={() =>
-                                router.push(
-                                  `/Exam-Delayed-Management/create-exam-delay/${examId}?StudentID=${previewStudentId}`
-                                )
-                              }
-                            >
-                              Exam Delay
                             </MenuItem>
 
                           </Menu>
@@ -1607,73 +1465,6 @@ export default function AssignTrainee() {
               handleDeleteSelectedStudent(selectedAssignStudentId)
             }
           />
-          <CustomModal
-            open={locationModel}
-            handleClose={handleLocationModelClose}
-            spacing={"66px 32px"}
-          >
-            <Typography
-              variant="h6"
-              component="h2"
-              sx={{
-                fontSize: "24px",
-                lineHeight: "36px",
-                color: theme.palette.primary.main,
-                fontWeight: 600,
-              }}
-            >
-              Are you sure ?
-            </Typography>
-            <Typography
-              sx={{
-                color: theme.palette.secondary.fieldText,
-                mt: 1,
-                fontSize: "14px",
-                lineHeight: "24px",
-              }}
-            >
-              Do you want to override this student’s current location?
-            </Typography>
-            <Stack
-              display={"flex"}
-              direction={"row"}
-              gap={"10px"}
-              justifyContent={"center"}
-              marginTop={"20px"}
-            >
-              <Button
-                sx={{
-                  ...primaryButon,
-                  bgcolor: theme.palette.primary.main,
-                  color: theme.palette.mode === "light" ? "#FFF" : "#000",
-                  p: "9px 20px",
-                  "&:hover": {
-                    bgcolor: theme.palette.primary.main,
-                    color: theme.palette.mode === "light" ? "#FFF" : "#000",
-                  },
-                }}
-                onClick={() => handleUpdateSelectedTrainee()}
-              >
-                Confirm
-              </Button>
-              <Button
-                onClick={handleLocationModelClose}
-                sx={{
-                  ...secondaryButon,
-                  bgcolor: "transparent",
-                  border: `1px solid ${theme.palette.primary.main}`,
-                  color: theme.palette.primary.main,
-                  "&:hover": {
-                    border: `1px solid ${theme.palette.primary.main}`,
-                    color: theme.palette.primary.main,
-                    background: "transparent",
-                  },
-                }}
-              >
-                Cancel
-              </Button>
-            </Stack>
-          </CustomModal>
           <CustomModal open={errorModel} handleClose={handleLocationModelClose}>
             <Typography
               variant="h6"
