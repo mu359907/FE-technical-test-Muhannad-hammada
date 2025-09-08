@@ -8,8 +8,7 @@ import { useRouter } from "next/navigation"
 import { ExamType } from "@/types/exam.type"
 import GenericTable from "@/components/GenericTable"
 import { examColumns } from "./examColumns"
-import { iMockExamTableData } from "./imetableData"
-import { useState } from "react"
+import useExam from "@/hooks/useExam"
 const BCrumb = [{ label: "Exam Management", link: "/Exam-Management" }]
 
 /**
@@ -18,7 +17,7 @@ const BCrumb = [{ label: "Exam Management", link: "/Exam-Management" }]
  */
 const ImockExam = () => {
   const router = useRouter()
-  const [iMockExamData, setIMockExamData] = useState(iMockExamTableData)
+  const { iMockExamData } = useExam()
   return (
     <PageContainer title="Exam Listing" description="Exam Listing">
       {/* breadcrumb */}
