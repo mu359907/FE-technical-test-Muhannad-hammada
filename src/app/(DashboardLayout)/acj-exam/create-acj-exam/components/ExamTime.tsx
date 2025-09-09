@@ -24,7 +24,6 @@ import { Box, Stack } from "@mui/system"
 import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers"
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
 import dayjs from "dayjs"
-import MockExamSlug from "./MockExamSlug"
 import CustomCheckbox from "@/app/(DashboardLayout)/components/forms/theme-elements/CustomCheckbox"
 import {
   mockExamSlug,
@@ -34,62 +33,43 @@ import {
 import { gradeCalculation } from "../../dropDowns"
 import theme from "@/utils/theme"
 import CustomFormLabel from "@/app/(DashboardLayout)/components/forms/theme-elements/CustomFormLabel"
+import { populateOptions } from "../utils"
+import useCreateExam from "@/hooks/useCreateExam"
 
-function ExamTime({
-  addRow,
-  deleteRow,
-  selectedCheckBoxIndex,
-  campusHandleChange,
-  rows,
-  timezoneHandleChange,
-  countryData,
-  countryHandleChange,
-  ampm,
-  handleTimeChange,
-  minutes,
-  hours,
-  handleClose,
-  anchorEl,
-  openPopoverId,
-  handleClick,
-  textFieldRef,
-  handleDateChangeForLocation,
-  locationDate,
-  handleCheckBoxChange,
-  checkedItems,
-  handleAvailabilityDateChange,
-  availabilityDateValue,
-  formik,
-  handleHourChange,
-  selectedHour,
-  handleShiftChange,
-  selectedShift,
-  handleMinuteChange,
-  selectedMinute,
-  populateOptions,
-  examType,
-  start,
-  startDue,
-  handleDueDateChange,
-  dueDateValue,
-  handleHourChangeDue,
-  selectedHourDue,
-  handleMinuteChangeDue,
-  selectedMinuteDue,
-  handleShiftChangeDue,
-  selectedShiftDue,
-  handleExamFeedBack,
-  mockOnlineAutoPublish,
-  selectedGrade,
-  handleGradeDropDown,
-  isShuffleQuiz,
-  handleSetUnlimited,
-  isUnlimited,
-  isTimeLimit,
-  examTimeExpire,
-  quizStart,
-  handleSetTimeLimit
-}: any) {
+function ExamTime() {
+  const {
+    handleAvailabilityDateChange,
+    availabilityDateValue,
+    formik,
+    handleHourChange,
+    selectedHour,
+    handleShiftChange,
+    selectedShift,
+    handleMinuteChange,
+    selectedMinute,
+    examType,
+    start,
+    startDue,
+    handleDueDateChange,
+    dueDateValue,
+    handleHourChangeDue,
+    selectedHourDue,
+    handleMinuteChangeDue,
+    selectedMinuteDue,
+    handleShiftChangeDue,
+    selectedShiftDue,
+    handleExamFeedBack,
+    mockOnlineAutoPublish,
+    selectedGrade,
+    handleGradeDropDown,
+    isShuffleQuiz,
+    handleSetUnlimited,
+    isUnlimited,
+    isTimeLimit,
+    examTimeExpire,
+    quizStart,
+    handleSetTimeLimit
+  } = useCreateExam()
   return (
     <Grid container spacing={"32px"} marginTop={"2px"}>
       <>
@@ -428,40 +408,6 @@ function ExamTime({
       )}
       {/* End Select date and time           */}
 
-      {/* Select camps */}
-      {examType?.ExamTypeSlug == "mockExamSlug" && (
-        <MockExamSlug
-          addRow={addRow}
-          deleteRow={deleteRow}
-          selectedCheckBoxIndex={selectedCheckBoxIndex}
-          campusHandleChange={campusHandleChange}
-          rows={rows}
-          timezoneHandleChange={timezoneHandleChange}
-          countryData={countryData}
-          countryHandleChange={countryHandleChange}
-          ampm={ampm}
-          handleTimeChange={handleTimeChange}
-          minutes={minutes}
-          hours={hours}
-          handleClose={handleClose}
-          anchorEl={anchorEl}
-          openPopoverId={openPopoverId}
-          handleClick={handleClick}
-          textFieldRef={textFieldRef}
-          handleDateChangeForLocation={handleDateChangeForLocation}
-          locationDate={locationDate}
-          handleCheckBoxChange={handleCheckBoxChange}
-          checkedItems={checkedItems}
-        />
-      )}
-      {/* End Select camps */}
-
-      {examType?.ExamTypeSlug !== mockExamSlug &&
-        examType?.ExamTypeSlug != selfAssessmentExamSlug && (
-          <Grid item xs={12} md={12}>
-            <Typography variant="h5">Timing and Display</Typography>
-          </Grid>
-        )}
       <Grid item xs={12} md={6}>
         {examType?.ExamTypeSlug != mockExamSlug &&
           examType?.ExamTypeSlug != selfAssessmentExamSlug && (

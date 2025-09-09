@@ -28,22 +28,25 @@ import {
 } from "../../constant"
 import CustomSelect from "@/app/(DashboardLayout)/components/forms/theme-elements/CustomSelect"
 import CustomCheckbox from "@/app/(DashboardLayout)/components/forms/theme-elements/CustomCheckbox"
+import { MockexamLocationTypeData } from "../data"
+import useCreateExam from "@/hooks/useCreateExam"
 
-function FormFirstSection({
-  formik,
-  examTypeData,
-  examType,
-  handleChangeDropDown,
-  handleChangeExamCourseDropDown,
-  examinationCourse,
-  selectedExamCourse,
-  checkBoxChecked,
-handleChangeCheckBox,
-MockexamLocationTypeData,
-handleChangeDropDownLocationTypeData,
-isTimeLimit,
-}: any) {
+function FormFirstSection() {
   const [searchLoading, setSearchLoading] = useState<boolean>(false)
+  const {
+    formik,
+    examTypeData,
+    examType,
+    handleChangeDropDown,
+    handleChangeExamCourseDropDown,
+    examinationCourse,
+    selectedExamCourse,
+    checkBoxChecked,
+    handleChangeCheckBox,
+    handleChangeDropDownLocationTypeData,
+    isTimeLimit
+  } = useCreateExam()
+
   return (
     <Card sx={commonContentCardStyle}>
       <Grid container spacing={"32px"}>

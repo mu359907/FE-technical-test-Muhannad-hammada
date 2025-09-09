@@ -30,30 +30,30 @@ import { Box, Stack } from "@mui/system"
 import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers"
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
 import dayjs from "dayjs"
+import { ampm, hours, minutes } from "../data"
+import useCreateExam from "@/hooks/useCreateExam"
 
-function MockExamSlug({
-  addRow,
-  deleteRow,
-  selectedCheckBoxIndex,
-  campusHandleChange,
-  rows,
-  timezoneHandleChange,
-  countryData,
-  countryHandleChange,
-  ampm,
-  handleTimeChange,
-  minutes,
-  hours,
-  handleClose,
-  anchorEl,
-  openPopoverId,
-  handleClick,
-  textFieldRef,
-  handleDateChangeForLocation,
-  locationDate,
-  handleCheckBoxChange,
-  checkedItems
-}: any) {
+function MockExamSlug() {
+  const {
+    addRow,
+    deleteRow,
+    selectedCheckBoxIndex,
+    campusHandleChange,
+    rows,
+    timezoneHandleChange,
+    countryData,
+    countryHandleChange,
+    handleTimeChange,
+    handleClose,
+    anchorEl,
+    openPopoverId,
+    handleClick,
+    textFieldRef,
+    handleDateChangeForLocation,
+    locationDate,
+    handleCheckBoxChange,
+    checkedItems
+  } = useCreateExam()
   return (
     <>
       <Grid item md={12}>

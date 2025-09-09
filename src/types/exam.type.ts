@@ -1,5 +1,4 @@
- 
-export type ExamType ={
+export type ExamType = {
   id?: string
   imockid?: string
   examnumber?: string
@@ -7,4 +6,8 @@ export type ExamType ={
   examtype?: string
   active?: Boolean
   examdate: string
+}
+
+export type CheckedItems = {
+  [key: string]: boolean
 }

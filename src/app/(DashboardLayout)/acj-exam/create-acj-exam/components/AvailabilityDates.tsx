@@ -3,22 +3,25 @@ import CustomTextField from "@/app/(DashboardLayout)/components/forms/theme-elem
 import {
   commonAutocompleteStyle,
   commonPopStyle,
-  disableInputStyle
+  disableInputStyle,
+  fieldLabel
 } from "@/utils/commonstyles"
 import theme from "@/utils/theme"
 import { Autocomplete, FormHelperText, Grid, Typography } from "@mui/material"
 import { Box, Stack } from "@mui/system"
 import { booklet } from "../../dropDowns"
 import { CornerDownArrowIcon } from "@/components/Icons"
+import useCreateExam from "@/hooks/useCreateExam"
 
-function AvailabilityDates({
-  formik,
-  fieldLabel,
-  isTimeLimit,
-  bookletValue,
-  numberOfQuestionError,
-  setNumberOfQuestionError
-}: any) {
+function AvailabilityDates() {
+  const {
+    formik,
+    isTimeLimit,
+    bookletValue,
+    numberOfQuestionError,
+    setNumberOfQuestionError
+  } = useCreateExam()
+
   return (
     <Grid container spacing={"32px"} marginTop={"2px"}>
       <Grid item xs={12} md={12}>
