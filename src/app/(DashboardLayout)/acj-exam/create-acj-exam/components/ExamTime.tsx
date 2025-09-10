@@ -35,6 +35,7 @@ import theme from "@/utils/theme"
 import CustomFormLabel from "@/app/(DashboardLayout)/components/forms/theme-elements/CustomFormLabel"
 import { populateOptions } from "../utils"
 import useCreateExam from "@/hooks/useCreateExam"
+import MockExamSlug from "./MockExamSlug"
 
 function ExamTime() {
   const {
@@ -70,6 +71,7 @@ function ExamTime() {
     quizStart,
     handleSetTimeLimit
   } = useCreateExam()
+
   return (
     <Grid container spacing={"32px"} marginTop={"2px"}>
       <>
@@ -913,6 +915,16 @@ function ExamTime() {
           </Box>
         </Stack>
       </Grid>
+      {examType && examType?.ExamTypeSlug == "mockExamSlug" && <MockExamSlug />}
+      {/* End Select camps */}
+
+      {examType &&
+        examType?.ExamTypeSlug !== mockExamSlug &&
+        examType?.ExamTypeSlug != selfAssessmentExamSlug && (
+          <Grid item xs={12} md={12}>
+            <Typography variant="h5">Timing and Display</Typography>
+          </Grid>
+        )}
     </Grid>
   )
 }

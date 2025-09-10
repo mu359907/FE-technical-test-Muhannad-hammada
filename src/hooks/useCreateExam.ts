@@ -93,8 +93,11 @@ const useCreateExam = () => {
 
   const formik = useFormik({
     initialValues: examInitialValues,
-    validationSchema: getValidationSchema(examType?.ExamTypeSlug, isUnlimited),
+    validationSchema: examType
+      ? getValidationSchema(examType.ExamTypeSlug, isUnlimited)
+      : undefined,
     onSubmit: async (values: any) => {
+      console.log("formik submitted", values)
       await handleSubmitExam(values)
     }
   })
@@ -188,7 +191,7 @@ const useCreateExam = () => {
     if (numberOfQuestionError) {
       return
     }
-    setIsLoading(true)
+
     if (!isTimeLimit) {
       values.ExamTimeLimit = 0
     }
@@ -276,7 +279,6 @@ const useCreateExam = () => {
       const result = await createNewExam(values)
       console.log("createNewExam result: ", result)
       if (result?.success) {
-        debugger
         toast({
           type: "success",
           message: "Exam has been created successfully."

@@ -1,5 +1,5 @@
 "use client"
-import { Button, Card, Box, Stack, Grid, Typography } from "@mui/material"
+import { Button, Card, Box, Stack } from "@mui/material"
 import Breadcrumb from "@/app/(DashboardLayout)/layout/shared/breadcrumb/Breadcrumb"
 import PageContainer from "@/app/(DashboardLayout)/components/container/PageContainer"
 import Loading from "../../loading"
@@ -14,8 +14,7 @@ import {
   primaryButon,
   secondaryButon
 } from "@/utils/commonstyles"
-import { mockExamSlug, selfAssessmentExamSlug } from "../constant"
-import MockExamSlug from "./components/MockExamSlug"
+import { mockExamSlug } from "../constant"
 
 export default function CreateIMockExam() {
   const {
@@ -41,7 +40,6 @@ export default function CreateIMockExam() {
 
         <Stack alignItems={"center"} direction={"row"}>
           <Stack flex={1}>
-            {" "}
             <Breadcrumb title="Create New Session" items={undefined} />
           </Stack>
         </Stack>
@@ -54,15 +52,6 @@ export default function CreateIMockExam() {
 
           <ExamTime />
           {/* Select camps */}
-          {examType?.ExamTypeSlug == "mockExamSlug" && <MockExamSlug />}
-          {/* End Select camps */}
-
-          {examType?.ExamTypeSlug !== mockExamSlug &&
-            examType?.ExamTypeSlug != selfAssessmentExamSlug && (
-              <Grid item xs={12} md={12}>
-                <Typography variant="h5">Timing and Display</Typography>
-              </Grid>
-            )}
         </Card>
         <Box mt={6}>
           <Box display={"flex"} gap={"12px"} justifyContent={"left"}>
