@@ -88,6 +88,7 @@ const useCreateExam = () => {
     }
   ])
   const [locationDate, setLocationDate] = useState<number | null>(null)
+  const [finalValues, setFinalValues] = useState({})
   const handleModalClose = () => setOpenModal(false)
   const router = useRouter()
 
@@ -98,7 +99,8 @@ const useCreateExam = () => {
       : undefined,
     onSubmit: async (values: any) => {
       console.log("formik submitted", values)
-      await handleSubmitExam(values)
+      setFinalValues(values)
+      // await handleSubmitExam(values)
     }
   })
   useEffect(() => {
