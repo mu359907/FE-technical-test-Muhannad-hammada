@@ -11,8 +11,6 @@ import {
 } from "@/services/newExamFlow/newExamFlowAPI"
 
 const useQuestionSelection = () => {
-  const preQuestionId = window.localStorage.getItem("new-question")
-
   const router = useRouter()
   const searchRouter = useSearchParams()
   const [PrepXID, setPrepXID] = useState(new Date().getTime())
@@ -22,9 +20,6 @@ const useQuestionSelection = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [searchLoading, setSearchLoading] = useState<boolean>(false)
   const [questionData, setQuestionData] = useState<any>()
-  const [assignQuestionCount, setAssignQuestionCount] = useState<any>()
-  const [defaultSelectedQuestionId, setDefaultSelectedQuestionId] =
-    useState<any>()
   const [searchValue, setSearchValue] = useState<any>("")
   const [selectedQuestionData, setSelectedQuestionData] = useState<any>()
   const [selectedCheckboxes, setSelectedCheckboxes] = useState<any>([])
@@ -37,7 +32,6 @@ const useQuestionSelection = () => {
   const [allChecked, setAllChecked] = useState(false)
   const [checkedItems, setCheckedItems] = useState<CheckedItems>({})
   const [openModal, setOpenModal] = useState(false)
-  const handleModalOpen = () => setOpenModal(true)
   const handleModalClose = () => setOpenModal(false)
   const [selectedAssignQuestionId, setSelectedAssignQuestionId] =
     useState<any>()
@@ -50,7 +44,6 @@ const useQuestionSelection = () => {
   const [previewQuestionId, setPreviewQuestionId] = useState<any>()
   const [examData, setExamData] = useState<any>()
   const [openAutocomplete, setOpenAutocomplete] = useState(false)
-  const [examStations, setExamStations] = useState<any>()
   const [tabValue, setTabValue] = useState("1")
   const [selectedQuestionStatus, setSelectedQuestionStatus] = useState<any>()
   const [selectedOptions, setSelectedOptions] = useState<any[]>([])

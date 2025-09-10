@@ -13,7 +13,13 @@ import {
   secondaryButon
 } from "@/utils/commonstyles"
 import StationDetails from "./components/StationDetails"
+import useQuestionSelection from "@/hooks/useQuestionSelection"
+import useAssignTrainee from "@/hooks/useAssignTrainee"
+import useCreateExam from "@/hooks/useCreateExam"
 const ReviewDetails = () => {
+  const { selectedQuestionData } = useQuestionSelection()
+  const { selectedStudentData } = useAssignTrainee()
+  const { examDetails } = useCreateExam()
   const { isLoading, examId, router, updateExamDataStatus } = useReviewDetails()
 
   if (isLoading) {
@@ -27,7 +33,7 @@ const ReviewDetails = () => {
 
       <Card sx={commonContentCardStyle}>
         <Stack>
-          <ReviewTable />
+          <ReviewTable data={examDetails} />
         </Stack>
         <Stack marginTop={"24px"}>
           <Button
@@ -40,10 +46,10 @@ const ReviewDetails = () => {
       </Card>
 
       {/* Trainee block */}
-      <TraineeBlock />
+      <TraineeBlock data={selectedStudentData} />
 
       {/* station details */}
-      <StationDetails />
+      <StationDetails data={selectedQuestionData}/>
 
       <Stack
         display={"flex"}

@@ -10,8 +10,9 @@ import {
   useTheme
 } from "@mui/material"
 
-function ReviewTable() {
+function ReviewTable({ data }: any) {
   const theme = useTheme()
+  console.log("Exam information", data)
   return (
     <TableContainer>
       <Table

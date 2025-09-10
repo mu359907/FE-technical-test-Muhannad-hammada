@@ -15,7 +15,8 @@ import {
 import CustomTablePagination from "@/components/CustomPagination"
 import { commonContentCardStyle, secondaryButon } from "@/utils/commonstyles"
 import useReviewDetails from "@/hooks/useReviewDetails"
-function StationDetails() {
+
+function StationDetails({ data }: any) {
   const theme = useTheme()
   const {
     examId,
@@ -25,6 +26,8 @@ function StationDetails() {
     rowsPerPage1,
     handlePagination1
   } = useReviewDetails()
+
+  console.log("Questions information", data)
 
   return (
     <Card sx={commonContentCardStyle}>

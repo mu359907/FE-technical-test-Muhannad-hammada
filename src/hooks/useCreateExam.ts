@@ -88,7 +88,7 @@ const useCreateExam = () => {
     }
   ])
   const [locationDate, setLocationDate] = useState<number | null>(null)
-  const [finalValues, setFinalValues] = useState({})
+  const [examDetails, setExamDetails] = useState({})
   const handleModalClose = () => setOpenModal(false)
   const router = useRouter()
 
@@ -98,9 +98,8 @@ const useCreateExam = () => {
       ? getValidationSchema(examType.ExamTypeSlug, isUnlimited)
       : undefined,
     onSubmit: async (values: any) => {
-      console.log("formik submitted", values)
-      setFinalValues(values)
-      // await handleSubmitExam(values)
+      setExamDetails(values)
+      await handleSubmitExam(values)
     }
   })
   useEffect(() => {
@@ -193,7 +192,7 @@ const useCreateExam = () => {
     if (numberOfQuestionError) {
       return
     }
-
+    setIsLoading(true)
     if (!isTimeLimit) {
       values.ExamTimeLimit = 0
     }
@@ -899,7 +898,8 @@ const useCreateExam = () => {
     isLoading,
     openModal,
     handleModalClose,
-    handleSaveAsDraft
+    handleSaveAsDraft,
+    examDetails
   }
 }
 

@@ -1,21 +1,21 @@
 import {
-    Button,
-    Card,
-    Stack,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-    Typography,
-    useTheme
+  Button,
+  Card,
+  Stack,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+  useTheme
 } from "@mui/material"
 import { commonContentCardStyle, secondaryButon } from "@/utils/commonstyles"
 import CustomTablePagination from "@/components/CustomPagination"
 import useReviewDetails from "@/hooks/useReviewDetails"
 
-function TraineeBlock() {
+function TraineeBlock({ data }: any) {
   const theme = useTheme()
   const {
     iMockExamData,
@@ -26,7 +26,8 @@ function TraineeBlock() {
     rowsPerPage,
     handlePagination
   } = useReviewDetails()
-  
+
+  console.log("Students information", data)
   return (
     <Card sx={commonContentCardStyle}>
       <Stack>
