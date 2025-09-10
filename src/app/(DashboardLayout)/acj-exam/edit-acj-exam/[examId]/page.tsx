@@ -876,35 +876,7 @@ export default function EditIMockExam({ params }: any) {
       const result = await getOneExamForNewExamEdit(examId)
       if (result?.success) {
         const data = result?.data
-        // const availabilityDate = data?.ExamAvailabilityDate;
-        // const dueDate = data?.ExamDueDate;
         setExamData(data)
-        // if (availabilityDate) {
-        //   console.log("timezone == ", timeZone);
-        //   const date = new Date(availabilityDate);
-        //   const hours = date.getHours();
-        //   const minutes = date.getMinutes();
-        //   const ampm = hours >= 12 ? "PM" : "AM";
-        //   const hour12 = hours % 12 || 12;
-
-        //   setStartHour(hour12);
-        //   setStartMinute(minutes.toString().padStart(2, "0"));
-        //   setStartampm(ampm);
-        //   setAvailabilityDateValue(availabilityDate);
-        // }
-        // if (dueDate) {
-        //   const date = new Date(dueDate);
-        //   const hours = date.getHours();
-        //   const minutes = date.getMinutes();
-        //   const ampm = hours >= 12 ? "PM" : "AM";
-        //   const hour12 = hours % 12 || 12;
-
-        //   setDueHour(hour12);
-        //   setDueMinute(minutes.toString().padStart(2, "0"));
-        //   setDueampm(ampm);
-        //   setDueDateValue(dueDate);
-        // }
-
         setSelectedExamCourse(data?.PrepXExamAFKACJOSCECourse || [])
         setIsTimeLimit(data?.ExamSetTimeLimit === 1)
         setIsChecked(data?.ExamSetTimeLimit !== 1)
@@ -1002,7 +974,6 @@ export default function EditIMockExam({ params }: any) {
             setNumberOfAttempt(1)
           }
           if (filteredData[0]?.ExamTypeSlug === selfAssessmentExamSlug) {
-            // setIsTimeLimit(false);
             setNumberOfAttempt(0)
             setNumberOfPaging(1)
           }
@@ -1011,7 +982,6 @@ export default function EditIMockExam({ params }: any) {
       })
       .catch((error) => {
         console.log("error:: ", error)
-        // setIsLoading(false);
       })
   }
 

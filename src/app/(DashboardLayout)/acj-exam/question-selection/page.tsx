@@ -58,19 +58,6 @@ const BCrumb = [
   }
 ]
 
-const styleModal = {
-  position: "absolute" as "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: "100%",
-  maxWidth: 460,
-  bgcolor: "background.paper",
-  boxShadow: 20,
-  p: { xs: 3, lg: 4, xl: 5 },
-  [`& .delete-modal-graphic`]: { marginRight: "15px" }
-}
-
 export default function StationManagement() {
   const {
     examId,
