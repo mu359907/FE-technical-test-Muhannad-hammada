@@ -1,7 +1,6 @@
 "use client"
 import React, { useEffect, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
-
 import toast from "@/app/(DashboardLayout)/components/Toast"
 import {
   assignTraineeForNewExam,
